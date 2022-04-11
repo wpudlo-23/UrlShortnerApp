@@ -1,0 +1,33 @@
+version: '3'
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa65yH12Ws"
+      MSSQL_PID: Express
+  api:
+    image: urlshortnerapp/api:latest
+    ports:
+      - "3001:80"
+    build: ./api
+    environment:
+      DBServer: "ms-sql-server"
+      DBPort: "1433"
+      DBUser: "sa"
+      DBPassword: "Pa65yH12Ws"
+      Database: "UrlsDb"
+    depends_on:
+      - ms-sql-server
+  web-ui:
+    image: urlshortnerapp/web-ui:latest
+    ports:
+      - "3000:3000"
+    build: ./web-ui
+    environment:
+      - REACT_APP_NAME=web-ui
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - api
