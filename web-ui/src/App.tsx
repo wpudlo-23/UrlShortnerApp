@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import UrlList from './components/UrlsList';
+import UrlsList from './components/UrlsList';
 import CreateUrls from './components/CreateUrl';
 import SlugRedirect from './components/SlugRedirect';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -63,7 +63,7 @@ function App() {
                 <Row><Col><br /></Col></Row>
                 <Row>
                   <Col>
-                  <UrlList urls={urls} setUrl={setUrl} deleteAll={deleteAll} />
+                  <UrlsList urls={urls} setUrl={setUrl} deleteAll={deleteAll} />
                   </Col>
                 </Row>
               </Container>
